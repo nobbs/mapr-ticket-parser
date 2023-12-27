@@ -1,0 +1,48 @@
+syntax = "proto2";
+
+package mapr.fs;
+
+option java_package = "com.mapr.fs.proto";
+option optimize_for = LITE_RUNTIME;
+option go_package = "ezmeral.hpe.com/datafab/fs/proto";
+
+message CredentialsMsg {
+  optional uint32 uid = 1;
+  repeated uint32 gids = 2;
+  optional bool isRoot = 3;
+  optional string userName = 4;
+  optional uint32 clientIp = 5;
+  optional bool isPrivilegedProcess = 6;
+  optional bool logInSeperateAuditPath = 7;
+  optional uint32 tenantUid = 8;
+  repeated uint32 tenantGids = 9;
+  optional bytes encryptedImpersonationMsg = 10;
+  optional bool fromMastGateway = 11;
+  optional .mapr.fs.Capabilities capabilities = 12;
+}
+
+message Capabilities {
+  optional uint64 clusterOpsMask = 1;
+}
+
+message Key {
+  optional bytes key = 1;
+}
+
+message TicketAndKey {
+  optional bytes encryptedTicket = 1;
+  optional .mapr.fs.Key userKey = 2;
+  optional .mapr.fs.CredentialsMsg userCreds = 3;
+  optional uint64 expiryTime = 4;
+  optional uint64 creationTimeSec = 5;
+  optional uint64 maxRenewalDurationSec = 6;
+  optional bool canUserImpersonate = 7;
+  repeated int32 ips = 8;
+  repeated int32 impersonatedUids = 9;
+  repeated int32 impersonatedGids = 10;
+  optional bool isTenant = 11;
+  optional bool isExternal = 12;
+  optional uint64 lastRenewalTime = 13;
+  optional bool canUserGenerateTicket = 14;
+  optional bool isRemoteTempTicket = 15;
+}
