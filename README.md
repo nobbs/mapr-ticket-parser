@@ -12,9 +12,11 @@ _The only proprietary code found in this repository is the Protobuf definition o
 
 To install the module, use the following command:
 
+<!-- x-release-please-start-version -->
 ```bash
-go get github.com/nobbs/mapr-ticket-parser@v0
+go get github.com/nobbs/mapr-ticket-parser@v0.1.0
 ```
+<!-- x-release-please-end -->
 
 ## Usage
 
