@@ -21,7 +21,7 @@ func TestFromBytes(t *testing.T) {
 			name: "valid ticket",
 			args: []byte("demo.mapr.com +Cze+qwYCbAXGbz56OO7UF+lGqL3WPXrNkO1SLawEEDmSbgNl019xBeBY3kvh+R13iz/mCnwpzsLQw4Y5jEnv5GtuIWbeoC95ha8VKwX8MKcE6Kn9nZ2AF0QminkHwNVBx6TDriGZffyJCfZzivBwBSdKoQEWhBOPFCIMAi7w2zV/SX5Ut7u4qIKvEpr0JHV7sLMWYLhYncM6CKMd7iECGvECsBvEZRVj+dpbEY0BaRN/W54/7wNWaSVELUF6JWHQ8dmsqty4cZlI0/MV10HZzIbl9sMLFQ="),
 			want: &parse.MaprTicket{
-				Host: "demo.mapr.com",
+				Cluster: "demo.mapr.com",
 				TicketAndKey: &mapr.TicketAndKey{
 					UserCreds: &mapr.CredentialsMsg{
 						UserName: ptr.To[string]("mapr"),
@@ -38,7 +38,7 @@ func TestFromBytes(t *testing.T) {
 			name: "another valid ticket",
 			args: []byte("demo.mapr.com cj1FDarNNKh7f+hL5ho1m32RzYyHPKuGIPJzE/CkUqEfcTGEP4YJuFlTsBmHuifI5LvNob/Y4xmDsrz9OxrBnhly/0g9xAs5ApZWNY8Rcab8q70IBYIbpu7xsBBTAiVRyLJkAtGFXNn104BB0AsS55GbQFUN9NAiWLzZY3/X1ITfGfDEGaYbWWTb1LGx6C0Jjgnr7TzXv1GqwiASbcUQCXOx4inguwMneYt9KhOp89smw6GBKP064DfIMHHR6lgv0XhBP6d9FVJ1QWKvcccvi2F3LReBtqA="),
 			want: &parse.MaprTicket{
-				Host: "demo.mapr.com",
+				Cluster: "demo.mapr.com",
 				TicketAndKey: &mapr.TicketAndKey{
 					UserCreds: &mapr.CredentialsMsg{
 						UserName: ptr.To[string]("mapr"),
@@ -56,7 +56,7 @@ func TestFromBytes(t *testing.T) {
 			name: "and another valid ticket",
 			args: []byte("demo.mapr.com IGem6fUksZ1pd4iut978SKElS4ktecRsAkrl+qwPYc7xhfMg4wkwALKDmFmpc8Xvrm1L9Et0jVBoyhCWMDCjhToZ8b6FsfCn8wdCOB0MWm9CRobGv7MDsoEO2TQ5Bnh8i/VfuthKFxd3Om9iZPVCI4I1S9h4p/77Al1GzTGcfFFf1g9fq1HXftT9TEDyLdABIyATJbzv8zD10IDT8P1f8nxl7lgT/7ZhGz7N24vSz6jBxHE7oHmvHzjW22xJwt7TJgvrP21boH9HTsTPiKZOpQMZ4zFo6JA4aNVlQQ0="),
 			want: &parse.MaprTicket{
-				Host: "demo.mapr.com",
+				Cluster: "demo.mapr.com",
 				TicketAndKey: &mapr.TicketAndKey{
 					UserCreds: &mapr.CredentialsMsg{
 						UserName: ptr.To[string]("mapr"),
@@ -90,7 +90,7 @@ func TestFromBytes(t *testing.T) {
 			}
 
 			// manually assert fields of the ticketAndKey
-			assert.Equal(t, tt.want.Host, got.Host)
+			assert.Equal(t, tt.want.Cluster, got.Cluster)
 			assert.Equal(t, tt.want.TicketAndKey.UserCreds, got.TicketAndKey.UserCreds)
 			assert.Equal(t, tt.want.TicketAndKey.ExpiryTime, got.TicketAndKey.ExpiryTime)
 			assert.Equal(t, tt.want.TicketAndKey.CreationTimeSec, got.TicketAndKey.CreationTimeSec)

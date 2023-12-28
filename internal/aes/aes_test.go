@@ -28,7 +28,7 @@ func TestDecodeAndReencode(t *testing.T) {
 	require.NoError(t, err)
 
 	// assert that the decoded ticket is the same as the original
-	assert.Equal(t, originalTicket.Host, rebuildTicket.Host)
+	assert.Equal(t, originalTicket.Cluster, rebuildTicket.Cluster)
 	assert.Equal(t, originalTicket.TicketAndKey.UserCreds.Gids, rebuildTicket.TicketAndKey.UserCreds.Gids)
 	assert.Equal(t, originalTicket.TicketAndKey.UserCreds.Uid, rebuildTicket.TicketAndKey.UserCreds.Uid)
 	assert.Equal(t, originalTicket.TicketAndKey.UserCreds.UserName, rebuildTicket.TicketAndKey.UserCreds.UserName)

@@ -4,7 +4,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"io"
 	"strings"
 
 	"github.com/nobbs/mapr-ticket-parser/internal/aes"
@@ -14,9 +13,12 @@ import (
 
 const errInvalidTicket = "invalid mapr ticket"
 
+// MaprTicket is a struct representing a MapR ticket.
 type MaprTicket struct {
-	Host               string `json:"host"`
-	*mapr.TicketAndKey `json:"ticketAndKey"`
+	// the cluster the ticket is for
+	Cluster string `json:"cluster"`
+	// the ticket and key
+	*mapr.TicketAndKey `json:"ticket"`
 }
 
 // unmarshal takes a byte slice containing a decrypted ticket and returns a TicketAndKey object.
@@ -37,13 +39,13 @@ func marshal(t *mapr.TicketAndKey) ([]byte, error) {
 // Unmarshal takes a byte slice containing an encoded MapR ticket string representation of a ticket
 // and returns a MaprTicket object.
 func Unmarshal(in []byte) (*MaprTicket, error) {
-	// split the input into the two parts (host and ticket blob)
+	// split the input into the two parts (cluster and ticket blob)
 	parts := strings.Split(string(in), " ")
 	if len(parts) != 2 {
-		return nil, fmt.Errorf("%s: %s", errInvalidTicket, "cannot split ticket into host and ticket")
+		return nil, fmt.Errorf("%s: %s", errInvalidTicket, "cannot split ticket into cluster and ticket")
 	}
 
-	host := parts[0]
+	cluster := parts[0]
 	blob := parts[1]
 
 	// base64 decode the ticket
@@ -65,7 +67,7 @@ func Unmarshal(in []byte) (*MaprTicket, error) {
 	}
 
 	return &MaprTicket{
-		Host:         host,
+		Cluster:      cluster,
 		TicketAndKey: ticketAndKey,
 	}, nil
 }
@@ -88,39 +90,29 @@ func Marshal(in *MaprTicket) ([]byte, error) {
 	// base64 encode the ticket
 	ticketEncoded := base64.StdEncoding.EncodeToString(ticketEncrypted)
 
-	// join the host and the ticket
-	return []byte(fmt.Sprintf("%s %s", in.Host, ticketEncoded)), nil
+	// join the cluster and the ticket
+	return []byte(fmt.Sprintf("%s %s", in.Cluster, ticketEncoded)), nil
 }
 
-// WriteJSON writes the ticket to the writer as a pretty-printed json object.
-func (t *MaprTicket) WriteJSON(w io.Writer) error {
-	// json encoding
+// String returns a string representation of the ticket.
+func (t *MaprTicket) String() string {
+	// encode to pretty-printed json
 	jsonBytes, err := json.MarshalIndent(t, "", "  ")
 	if err != nil {
-		return err
+		return ""
 	}
 
-	// write the json to the writer
-	if _, err = w.Write(jsonBytes); err != nil {
-		return err
-	}
-
-	// print a newline at the end
-	if _, err = w.Write([]byte("\n")); err != nil {
-		return err
-	}
-
-	return nil
+	return string(jsonBytes)
 }
 
-// Redact returns a new MaprTicket object with the properties UserKey and EncryptedTicket removed.
-func (t *MaprTicket) Redact() *MaprTicket {
+// Mask returns a new MaprTicket object with the properties UserKey and EncryptedTicket removed.
+func (t *MaprTicket) Mask() *MaprTicket {
 	ticketAndKey := proto.Clone(t.TicketAndKey).(*mapr.TicketAndKey)
 	ticketAndKey.UserKey = nil
 	ticketAndKey.EncryptedTicket = nil
 
 	return &MaprTicket{
-		Host:         t.Host,
+		Cluster:      t.Cluster,
 		TicketAndKey: ticketAndKey,
 	}
 }
