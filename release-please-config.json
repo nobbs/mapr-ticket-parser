@@ -10,7 +10,8 @@
       "release-type": "go",
       "draft": false,
       "prerelease": false,
-      "extra-files": ["internal/version/version.go"]
+      "extra-files": ["internal/version/version.go"],
+      "initial-version": "0.1.0"
     }
   },
   "changelog-sections": [
