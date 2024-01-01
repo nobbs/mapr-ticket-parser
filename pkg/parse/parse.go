@@ -21,6 +21,13 @@ type MaprTicket struct {
 	*mapr.TicketAndKey `json:"ticket"`
 }
 
+// NewMaprTicket returns a new empty MaprTicket object.
+func NewMaprTicket() *MaprTicket {
+	return &MaprTicket{
+		TicketAndKey: &mapr.TicketAndKey{},
+	}
+}
+
 // unmarshal takes a byte slice containing a decrypted ticket and returns a TicketAndKey object.
 func unmarshal(ticket []byte) (*mapr.TicketAndKey, error) {
 	ticketAndKey := &mapr.TicketAndKey{}
