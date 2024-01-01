@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.1.1](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.0...v0.1.1) (2024-01-01)
+
+
+### Miscellaneous Chores
+
+* **deps:** clean up go.mod ([3ee8795](https://github.com/nobbs/mapr-ticket-parser/commit/3ee8795ab7cc6712997a8240b7d522ffe5f690f3))
+
+
+### Continuous Integration
+
+* enable codecov reporting ([27669e7](https://github.com/nobbs/mapr-ticket-parser/commit/27669e7885049cdcf67f5a9537820d101d1d3851))
+* **release:** properly update module version in readme ([73a2542](https://github.com/nobbs/mapr-ticket-parser/commit/73a25421f5c8ded3df87e22810a641097cc9fe17))
+* **renovate:** add renovate.json ([#3](https://github.com/nobbs/mapr-ticket-parser/issues/3)) ([8c121f0](https://github.com/nobbs/mapr-ticket-parser/commit/8c121f01df35309745f5e803fefea85d61bba66e))
+* **tests:** enable code coverage reporting ([27669e7](https://github.com/nobbs/mapr-ticket-parser/commit/27669e7885049cdcf67f5a9537820d101d1d3851))
+
+
+### Features
+
+* add function to create new empty ticket ([#6](https://github.com/nobbs/mapr-ticket-parser/issues/6)) ([3ee8795](https://github.com/nobbs/mapr-ticket-parser/commit/3ee8795ab7cc6712997a8240b7d522ffe5f690f3))
+
 ## 0.1.0 (2023-12-28)
 
 
