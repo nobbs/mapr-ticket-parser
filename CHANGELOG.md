@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.2](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.1...v0.1.2) (2024-01-25)
+
+
+### Features
+
+* prettify JSON output ([#11](https://github.com/nobbs/mapr-ticket-parser/issues/11)) ([8400884](https://github.com/nobbs/mapr-ticket-parser/commit/8400884758d9f123b75717313bf1f2a007bd435a))
+
+
+### Bug Fixes
+
+* **deps:** update dependency protobuf to v4.25.2 ([#8](https://github.com/nobbs/mapr-ticket-parser/issues/8)) ([6fc990e](https://github.com/nobbs/mapr-ticket-parser/commit/6fc990ed54b90ff85ea7e61622fcaae919f6e358))
+* **deps:** update k8s.io/utils digest to e7106e6 ([#7](https://github.com/nobbs/mapr-ticket-parser/issues/7)) ([a795023](https://github.com/nobbs/mapr-ticket-parser/commit/a795023c36df490e16ec9f8c8ddcec2cc7363ae3))
+
 ## [0.1.1](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.0...v0.1.1) (2024-01-01)
 
 
