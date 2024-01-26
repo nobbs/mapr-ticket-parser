@@ -3,11 +3,13 @@ package aes_test
 import (
 	"testing"
 
-	ticket "github.com/nobbs/mapr-ticket-parser/pkg/parse"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	ticket "github.com/nobbs/mapr-ticket-parser/pkg/parse"
 )
 
+// nolint:paralleltest
 func TestDecodeAndReencode(t *testing.T) {
 	originalTicketStr := []byte("demo.mapr.com WWup1XJ7wLYtrXA7vydwiorHLq2iqMvdLYa1qOCDqWE+qDtbAm0zYT1LZAqJ6NXNbgXXS+hP9vbcYTv69Fe+F3hJtBSPs6YHnd/b0T9hX7AyejyIJ/4RJ4ixjVpcl2Y9OMYKR28KjS7rV5sczOVLBf4kIVHa9PG0mRUopCOOK/HPsuaRSJRuvv1U5K9xUR+nND0cq6eN02PGVCsjERecNxtPgeHIdts3wDgld/JE2jWcWptNGwozmwqSAUym7VPNZNtjm67s+wXPSrjxvH69WcJmmpjJHpA=")
 

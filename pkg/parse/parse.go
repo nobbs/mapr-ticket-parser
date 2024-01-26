@@ -6,9 +6,10 @@ import (
 	"fmt"
 	"strings"
 
+	"google.golang.org/protobuf/proto"
+
 	"github.com/nobbs/mapr-ticket-parser/internal/aes"
 	mapr "github.com/nobbs/mapr-ticket-parser/internal/ezmeral.hpe.com/datafab/fs/proto"
-	"google.golang.org/protobuf/proto"
 )
 
 const errInvalidTicket = "invalid mapr ticket"
