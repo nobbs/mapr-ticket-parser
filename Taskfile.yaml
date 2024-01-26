@@ -9,7 +9,7 @@ env:
 
 tasks:
   default:
-    desc: Run tests
+    desc: Run tests and linter
     cmds:
       - task: test
       - task: lint
@@ -26,7 +26,7 @@ tasks:
     cmds:
       - |
         export PATH=$PATH:$(go env GOPATH)/bin
-        gotestsum -- -covermode=atomic ./...
+        gotestsum --  -coverprofile=coverage.txt -covermode=atomic ./...
     sources:
       - "**/*.go"
 
