@@ -1,10 +1,13 @@
 package aes_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 
 	ticket "github.com/nobbs/mapr-ticket-parser/pkg/parse"
 )
@@ -30,13 +33,12 @@ func TestDecodeAndReencode(t *testing.T) {
 	require.NoError(t, err)
 
 	// assert that the decoded ticket is the same as the original
-	assert.Equal(t, originalTicket.Cluster, rebuildTicket.Cluster)
-	assert.Equal(t, originalTicket.TicketAndKey.UserCreds.Gids, rebuildTicket.TicketAndKey.UserCreds.Gids)
-	assert.Equal(t, originalTicket.TicketAndKey.UserCreds.Uid, rebuildTicket.TicketAndKey.UserCreds.Uid)
-	assert.Equal(t, originalTicket.TicketAndKey.UserCreds.UserName, rebuildTicket.TicketAndKey.UserCreds.UserName)
-	assert.Equal(t, originalTicket.TicketAndKey.ExpiryTime, rebuildTicket.TicketAndKey.ExpiryTime)
-	assert.Equal(t, originalTicket.TicketAndKey.CreationTimeSec, rebuildTicket.TicketAndKey.CreationTimeSec)
-	assert.Equal(t, originalTicket.TicketAndKey.MaxRenewalDurationSec, rebuildTicket.TicketAndKey.MaxRenewalDurationSec)
-	assert.Equal(t, originalTicket.TicketAndKey.CanUserImpersonate, rebuildTicket.TicketAndKey.CanUserImpersonate)
-	assert.Equal(t, originalTicket.TicketAndKey.IsExternal, rebuildTicket.TicketAndKey.IsExternal)
+	assertProtoEqual(t, originalTicket, rebuildTicket)
+}
+
+// assertProtoEqual asserts that two protobuf messages are equal by calling proto.Equal on them.
+func assertProtoEqual(t *testing.T, a, b protoreflect.ProtoMessage) {
+	t.Helper()
+
+	assert.True(t, proto.Equal(a, b), fmt.Sprintf("These two protobuf messages are not equal:\n%v\n%v", a, b))
 }
