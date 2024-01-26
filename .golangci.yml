@@ -1,22 +1,17 @@
 # docs: <https://golangci-lint.run/usage/configuration/>
+
+run:
+  timeout: "5m"
+
 linters:
   enable:
-    - gofmt
-    - gci
     - errorlint
-    - dogsled
-    - nilnil
-    - gocyclo
-    - gocognit
-    - funlen
-    - dupl
+    - gci
     - gocritic
+    - gofmt
+    - paralleltest
 
 linters-settings:
-  gocyclo:
-    min-complexity: 10
-  gocognit:
-    min-complexity: 20
   funlen:
     lines: 120
     statements: 120
@@ -24,3 +19,17 @@ linters-settings:
     rewrite-rules:
       - pattern: "interface{}"
         replacement: "any"
+  gci:
+    sections:
+      - standard
+      - default
+      - prefix(k8s.io,sigs.k8s.io)
+      - prefix(github.com/nobbs)
+
+issues:
+  exclude-rules:
+    - path: (.+)_test.go
+      linters:
+        - funlen
+        - dupl
+        - unused

@@ -1,0 +1,56 @@
+version: "3"
+
+vars:
+  GOPATH:
+    sh: go env GOPATH
+
+env:
+  CGO_ENABLED: 0
+
+tasks:
+  default:
+    desc: Run tests and linter
+    cmds:
+      - task: test
+      - task: lint
+
+  generate:
+    desc: Generate protobuf files
+    cmds:
+      - |
+        export PATH=$PATH:$(go env GOPATH)/bin
+        protoc --proto_path=./proto --go_out=internal security.proto
+
+  test:
+    desc: Run tests
+    cmds:
+      - |
+        export PATH=$PATH:$(go env GOPATH)/bin
+        gotestsum --  -coverprofile=coverage.txt -covermode=atomic ./...
+    sources:
+      - "**/*.go"
+
+  lint:
+    desc: Run linter
+    cmds:
+      - golangci-lint run
+
+  lint:fix:
+    desc: Run linter with auto-fix enabled
+    cmds:
+      - golangci-lint run --fix
+
+  pre-commit:
+    desc: Run pre-commit checks
+    cmds:
+      - pre-commit run --all-files
+
+  install:protoc-gen-go:
+    desc: Install protoc-gen-go
+    cmds:
+      - go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+
+  install:gotestsum:
+    desc: Install gotestsum
+    cmds:
+      - go install gotest.tools/gotestsum@latest

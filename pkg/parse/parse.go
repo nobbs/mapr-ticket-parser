@@ -6,9 +6,10 @@ import (
 	"fmt"
 	"strings"
 
+	"google.golang.org/protobuf/proto"
+
 	"github.com/nobbs/mapr-ticket-parser/internal/aes"
 	mapr "github.com/nobbs/mapr-ticket-parser/internal/ezmeral.hpe.com/datafab/fs/proto"
-	"google.golang.org/protobuf/proto"
 )
 
 const errInvalidTicket = "invalid mapr ticket"
@@ -62,6 +63,11 @@ func Unmarshal(in []byte) (*MaprTicket, error) {
 	}
 
 	// decrypt the ticket
+	aes, err := aes.New()
+	if err != nil {
+		return nil, err
+	}
+
 	decryptedTicket, err := aes.Decrypt(ticketEncrypted)
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", errInvalidTicket, err)
@@ -89,6 +95,11 @@ func Marshal(in *MaprTicket) ([]byte, error) {
 	}
 
 	// encrypt the ticket
+	aes, err := aes.New()
+	if err != nil {
+		return nil, err
+	}
+
 	ticketEncrypted, err := aes.Encrypt(ticketDecrypted)
 	if err != nil {
 		return nil, err
