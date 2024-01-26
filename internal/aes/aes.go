@@ -3,8 +3,7 @@ package aes
 import (
 	"crypto/aes"
 	"crypto/cipher"
-	"crypto/rand"
-	"sync"
+	"fmt"
 )
 
 const (
@@ -14,33 +13,48 @@ const (
 )
 
 var (
-	// key is the AES key used for the AES-GCM encryption. The value is taken
+	// defaultKey is the AES defaultKey used for the AES-GCM encryption. The value is taken
 	// from reverse-engineering the `marplogin` command. Based on the
-	// key value, it's not really clear why encryption is used at all.
-	key = []byte("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-
-	// as the key is static, we can use a single AES decrypter for all
-	// tickets
-	aesSingle *AES
-	lock      = &sync.Mutex{}
+	// defaultKey value, it's not really clear why encryption is used at all.
+	defaultKey = []byte("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 )
 
 type AES struct {
-	block *cipher.Block
-	aead  *cipher.AEAD
+	block cipher.Block
+	aead  cipher.AEAD
+	rand  randReader
 }
 
-// getAES returns a AES decrypter using the key and nonce size taken from
+type aesOptions struct {
+	key  []byte
+	rand randReader
+}
+
+type AESOption func(*aesOptions)
+
+// WithRand allows overriding the rand.Reader used by the AES implementation.
+func WithRand(rand randReader) AESOption {
+	return func(aes *aesOptions) {
+		aes.rand = rand
+	}
+}
+
+// New returns a AES decrypter using the key and nonce size taken from
 // reverse-engineering the `marplogin` command.
-func getAES() (*AES, error) {
-	if aesSingle != nil {
-		return aesSingle, nil
+func New(opts ...AESOption) (*AES, error) {
+	// set the default options
+	options := &aesOptions{
+		key:  defaultKey,
+		rand: &cryptoRandReader{},
 	}
 
-	lock.Lock()
-	defer lock.Unlock()
+	// apply the given options
+	for _, opt := range opts {
+		opt(options)
+	}
 
-	block, err := aes.NewCipher(key)
+	// create the AES-GCM cipher
+	block, err := aes.NewCipher(options.key)
 	if err != nil {
 		return nil, err
 	}
@@ -51,22 +65,18 @@ func getAES() (*AES, error) {
 	}
 
 	return &AES{
-		block: &block,
-		aead:  &aesGCM,
+		block: block,
+		aead:  aesGCM,
+		rand:  options.rand,
 	}, nil
 }
 
 // Decrypt decrypts the given cipher text using the AES-GCM algorithm.
-func Decrypt(cipherText []byte) ([]byte, error) {
-	aes, err := getAES()
-	if err != nil {
-		return nil, err
-	}
-
+func (aes *AES) Decrypt(cipherText []byte) ([]byte, error) {
 	nonce := cipherText[:nonceSize]
 	cipherText = cipherText[nonceSize:]
 
-	plainText, err := (*aes.aead).Open(nil, nonce, cipherText, nil)
+	plainText, err := aes.aead.Open(nil, nonce, cipherText, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -75,19 +85,16 @@ func Decrypt(cipherText []byte) ([]byte, error) {
 }
 
 // Encrypt encrypts the given plain text using the AES-GCM algorithm.
-func Encrypt(plainText []byte) ([]byte, error) {
-	aes, err := getAES()
-	if err != nil {
-		return nil, err
-	}
-
+func (aes *AES) Encrypt(plainText []byte) ([]byte, error) {
 	// generate a random nonce
 	nonce := make([]byte, nonceSize)
-	if _, err := rand.Read(nonce); err != nil {
+	if n, err := aes.rand.Read(nonce); err != nil {
 		return nil, err
+	} else if n != nonceSize {
+		return nil, fmt.Errorf("expected to read %d bytes, got %d", nonceSize, n)
 	}
 
-	cipherText := (*aes.aead).Seal(nil, nonce, plainText, nil)
+	cipherText := aes.aead.Seal(nil, nonce, plainText, nil)
 
 	return append(nonce, cipherText...), nil
 }

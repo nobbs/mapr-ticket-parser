@@ -63,6 +63,11 @@ func Unmarshal(in []byte) (*MaprTicket, error) {
 	}
 
 	// decrypt the ticket
+	aes, err := aes.New()
+	if err != nil {
+		return nil, err
+	}
+
 	decryptedTicket, err := aes.Decrypt(ticketEncrypted)
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", errInvalidTicket, err)
@@ -90,6 +95,11 @@ func Marshal(in *MaprTicket) ([]byte, error) {
 	}
 
 	// encrypt the ticket
+	aes, err := aes.New()
+	if err != nil {
+		return nil, err
+	}
+
 	ticketEncrypted, err := aes.Encrypt(ticketDecrypted)
 	if err != nil {
 		return nil, err
