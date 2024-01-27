@@ -9,21 +9,17 @@ import (
 	"k8s.io/apimachinery/pkg/util/duration"
 )
 
-// humanMaprTicket is a struct representing a MapR ticket, with custom JSON marshalling to make the
-// output more human readable.
-type humanMaprTicket struct {
-	Cluster            string `json:"cluster"`
-	*humanTicketAndKey `json:"ticket"`
-}
-
+// Custom JSON marshalling to make the output more human readable.
 type humanTicketAndKey mapr.TicketAndKey
 
-// Custom JSON marshalling to make the output more human readable.
-func (mt *MaprTicket) MarshalJSON() ([]byte, error) {
-	return json.Marshal(&humanMaprTicket{
-		Cluster:           mt.Cluster,
-		humanTicketAndKey: (*humanTicketAndKey)(mt.TicketAndKey),
-	})
+func (t *MaprTicket) prettyJSON() ([]byte, error) {
+	return json.MarshalIndent(&struct {
+		Cluster      string             `json:"cluster"`
+		TicketAndKey *humanTicketAndKey `json:"ticket"`
+	}{
+		Cluster:      t.Cluster,
+		TicketAndKey: (*humanTicketAndKey)(t.TicketAndKey),
+	}, "", "  ")
 }
 
 // Custom JSON marshalling to make the output more human readable.

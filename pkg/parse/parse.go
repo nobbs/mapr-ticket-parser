@@ -2,7 +2,6 @@ package parse
 
 import (
 	"encoding/base64"
-	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -115,7 +114,7 @@ func Marshal(in *MaprTicket) ([]byte, error) {
 // String returns a string representation of the ticket.
 func (t *MaprTicket) String() string {
 	// encode to pretty-printed json
-	jsonBytes, err := json.MarshalIndent(t, "", "  ")
+	jsonBytes, err := t.prettyJSON()
 	if err != nil {
 		return ""
 	}
