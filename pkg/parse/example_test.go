@@ -8,11 +8,17 @@ package parse_test
 import (
 	"fmt"
 	"log"
+	"os"
 
 	. "github.com/nobbs/mapr-ticket-parser/pkg/parse"
 
 	"k8s.io/utils/ptr"
 )
+
+// Set the timezone to Europe/Berlin for the examples to work as expected in CI.
+func init() {
+	os.Setenv("TZ", "Europe/Berlin")
+}
 
 // This example shows a complete roundtrip of a MapR ticket. It takes a base64 encoded ticket,
 // unmarshals it, marshals it again and prints the re-encrypted ticket. The re-encrypted ticket
