@@ -150,6 +150,16 @@ func (t *MaprTicket) Mask() *MaprTicket {
 	}
 }
 
+// Equal returns true if the two tickets are equal, false otherwise. This comparison is done by
+// using the proto.Equal function provided by the protobuf library.
+func Equal(x, y *MaprTicket) bool {
+	if x.Cluster != y.Cluster {
+		return false
+	}
+
+	return proto.Equal(x.TicketAndKey, y.TicketAndKey)
+}
+
 // unmarshal takes a byte slice containing a decrypted ticket and returns a TicketAndKey object.
 func unmarshal(ticket []byte) (*mapr.TicketAndKey, error) {
 	ticketAndKey := &mapr.TicketAndKey{}

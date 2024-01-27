@@ -11,8 +11,6 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protoreflect"
 
 	mapr "github.com/nobbs/mapr-ticket-parser/internal/ezmeral.hpe.com/datafab/fs/proto"
 	. "github.com/nobbs/mapr-ticket-parser/pkg/parse"
@@ -129,51 +127,60 @@ func TestMarshalUnmarshalRoundtrip(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		args    *mapr.TicketAndKey
+		args    *MaprTicket
 		wantErr bool
 	}{
 		{
 			name: "valid ticket",
-			args: &mapr.TicketAndKey{
-				UserCreds: &mapr.CredentialsMsg{
-					UserName: ptr.To[string]("mapr"),
-					Uid:      ptr.To[uint32](5000),
-					Gids:     []uint32{5000, 0, 5001},
+			args: &MaprTicket{
+				Cluster: "demo.mapr.com",
+				TicketAndKey: &mapr.TicketAndKey{
+					UserCreds: &mapr.CredentialsMsg{
+						UserName: ptr.To[string]("mapr"),
+						Uid:      ptr.To[uint32](5000),
+						Gids:     []uint32{5000, 0, 5001},
+					},
+					MaxRenewalDurationSec: ptr.To[uint64](0),
+					ExpiryTime:            ptr.To[uint64](922337203685477),
+					CreationTimeSec:       ptr.To[uint64](1522852297),
 				},
-				MaxRenewalDurationSec: ptr.To[uint64](0),
-				ExpiryTime:            ptr.To[uint64](922337203685477),
-				CreationTimeSec:       ptr.To[uint64](1522852297),
 			},
 			wantErr: false,
 		},
 		{
 			name: "another valid ticket",
-			args: &mapr.TicketAndKey{
-				UserCreds: &mapr.CredentialsMsg{
-					UserName: ptr.To[string]("mapr"),
-					Uid:      ptr.To[uint32](5000),
-					Gids:     []uint32{5000, 1000},
+			args: &MaprTicket{
+				Cluster: "demo.mapr.com",
+				TicketAndKey: &mapr.TicketAndKey{
+					UserCreds: &mapr.CredentialsMsg{
+						UserName: ptr.To[string]("mapr"),
+						Uid:      ptr.To[uint32](5000),
+						Gids:     []uint32{5000, 1000},
+					},
+					MaxRenewalDurationSec: ptr.To[uint64](2592000),
+					ExpiryTime:            ptr.To[uint64](1550578429),
+					CreationTimeSec:       ptr.To[uint64](1549368829),
+					CanUserImpersonate:    ptr.To[bool](true),
 				},
-				MaxRenewalDurationSec: ptr.To[uint64](2592000),
-				ExpiryTime:            ptr.To[uint64](1550578429),
-				CreationTimeSec:       ptr.To[uint64](1549368829),
-				CanUserImpersonate:    ptr.To[bool](true),
 			},
 			wantErr: false,
 		},
 		{
 			name: "and another valid ticket",
-			args: &mapr.TicketAndKey{
-				UserCreds: &mapr.CredentialsMsg{
-					UserName: ptr.To[string]("mapr"),
-					Uid:      ptr.To[uint32](5000),
-					Gids:     []uint32{5000, 5003, 0},
+			args: &MaprTicket{
+				Cluster: "demo.mapr.com",
+				TicketAndKey: &mapr.TicketAndKey{
+					UserCreds: &mapr.CredentialsMsg{
+						UserName: ptr.To[string]("mapr"),
+						Uid:      ptr.To[uint32](5000),
+						Gids:     []uint32{5000, 5003, 0},
+					},
+					MaxRenewalDurationSec: ptr.To[uint64](2592000),
+					ExpiryTime:            ptr.To[uint64](1619735566),
+					CreationTimeSec:       ptr.To[uint64](1618525966),
+					CanUserImpersonate:    ptr.To[bool](true),
+					IsExternal:            ptr.To[bool](false),
 				},
-				MaxRenewalDurationSec: ptr.To[uint64](2592000),
-				ExpiryTime:            ptr.To[uint64](1619735566),
-				CreationTimeSec:       ptr.To[uint64](1618525966),
-				CanUserImpersonate:    ptr.To[bool](true),
-				IsExternal:            ptr.To[bool](false),
 			},
 			wantErr: false,
 		},
@@ -185,9 +192,7 @@ func TestMarshalUnmarshalRoundtrip(t *testing.T) {
 			t.Parallel()
 
 			// marshal the ticket
-			ticket := &MaprTicket{
-				TicketAndKey: tt.args,
-			}
+			ticket := tt.args
 			marshalled, err := Marshal(ticket)
 			require.NoError(t, err)
 
@@ -196,7 +201,7 @@ func TestMarshalUnmarshalRoundtrip(t *testing.T) {
 			require.NoError(t, err)
 
 			// assert that the unmarshalled ticket is the same as the original
-			assertProtoEqual(t, tt.args, unmarshalled.TicketAndKey)
+			assertTicketEqual(t, tt.args, unmarshalled)
 
 			// marshal the unmarshalled ticket again
 			marshalledAgain, err := Marshal(unmarshalled)
@@ -207,7 +212,7 @@ func TestMarshalUnmarshalRoundtrip(t *testing.T) {
 			require.NoError(t, err)
 
 			// assert that the unmarshalled ticket is the same as the original
-			assertProtoEqual(t, tt.args, unmarshalledAgain.TicketAndKey)
+			assertTicketEqual(t, tt.args, unmarshalledAgain)
 		})
 	}
 }
@@ -256,9 +261,9 @@ func TestMaprTicket_Mask(t *testing.T) {
 	}
 }
 
-// assertProtoEqual asserts that two protobuf messages are equal by calling proto.Equal on them.
-func assertProtoEqual(t *testing.T, a, b protoreflect.ProtoMessage) {
+// assertTicketEqual asserts that two tickets messages are equal by calling proto.Equal on them.
+func assertTicketEqual(t *testing.T, a, b *MaprTicket) {
 	t.Helper()
 
-	assert.True(t, proto.Equal(a, b), fmt.Sprintf("These two protobuf messages are not equal:\n%v\n%v", a, b))
+	assert.True(t, Equal(a, b), fmt.Sprintf("These two tickets are not equal:\n%v\n%v", a, b))
 }
