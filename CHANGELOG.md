@@ -1,5 +1,41 @@
 # Changelog
 
+## [0.1.3](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.2...v0.1.3) (2024-01-27)
+
+
+### Miscellaneous Chores
+
+* add license headers to all files ([61ad551](https://github.com/nobbs/mapr-ticket-parser/commit/61ad551ba423527de066eb8baaa0d979f1632401))
+
+
+### Continuous Integration
+
+* use gotestsum for running tests ([a35059f](https://github.com/nobbs/mapr-ticket-parser/commit/a35059f80852dc17d6120e99b6e0c6879b6e99c8))
+
+
+### Documentation
+
+* add examples to go docs ([0131d09](https://github.com/nobbs/mapr-ticket-parser/commit/0131d099b2c6fa6af346063fde271e9e729a5d17))
+* update README.md ([148f8f5](https://github.com/nobbs/mapr-ticket-parser/commit/148f8f57272badf33f096399134274529d618399))
+
+
+### Bug Fixes
+
+* add Equal function to MaprTicket type ([3bf2f4a](https://github.com/nobbs/mapr-ticket-parser/commit/3bf2f4a34f6bea4274cdd138bae0abe3c203717d))
+
+
+### Code Refactoring
+
+* improve testing capabilities for aes package ([a35059f](https://github.com/nobbs/mapr-ticket-parser/commit/a35059f80852dc17d6120e99b6e0c6879b6e99c8))
+* simplify pretty printing ([2610b06](https://github.com/nobbs/mapr-ticket-parser/commit/2610b06070144531cedb3b071dfb6f384049de05))
+* use proto.Equal in aes_test ([a35059f](https://github.com/nobbs/mapr-ticket-parser/commit/a35059f80852dc17d6120e99b6e0c6879b6e99c8))
+
+
+### Tests
+
+* add more test for `parse` package ([#12](https://github.com/nobbs/mapr-ticket-parser/issues/12)) ([a35059f](https://github.com/nobbs/mapr-ticket-parser/commit/a35059f80852dc17d6120e99b6e0c6879b6e99c8))
+* pin timezone for CI in examples ([ca920c4](https://github.com/nobbs/mapr-ticket-parser/commit/ca920c4031ed897edf40073813f86e9cddf7d626))
+
 ## [0.1.2](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.1...v0.1.2) (2024-01-25)
 
 
