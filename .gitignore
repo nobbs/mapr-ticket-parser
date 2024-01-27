@@ -22,3 +22,6 @@ go.work
 
 # Taskfile cache
 .task/
+
+# Coverage files
+coverage.*
