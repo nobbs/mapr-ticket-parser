@@ -17,6 +17,9 @@ import (
 // Custom JSON marshalling to make the output more human readable.
 type humanTicketAndKey mapr.TicketAndKey
 
+// prettyJSON returns a byte slice containing the JSON representation of the ticket. The JSON
+// representation is human readable, ie. timestamps are converted from their unix epoch format to
+// RFC3339 and durations are converted to human readable format.
 func (t *MaprTicket) prettyJSON() ([]byte, error) {
 	return json.MarshalIndent(&struct {
 		Cluster      string             `json:"cluster"`

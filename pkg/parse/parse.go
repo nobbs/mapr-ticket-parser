@@ -3,10 +3,18 @@
 //
 // SPX-License-Identifier: MIT
 
+// Package parse provides functions to parse MapR ticket strings to obtain the information contained
+// in the ticket.
+//
+// A MapR ticket is a string containing two parts, separated by a space. The first part is the
+// cluster the ticket is for, the second part is the ticket itself. The ticket is base64 encoded
+// and encrypted using AES-256-GCM. This package provides functions to marshal and unmarshal
+// MapR tickets from their string representation into a struct and back.
 package parse
 
 import (
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -16,7 +24,8 @@ import (
 	mapr "github.com/nobbs/mapr-ticket-parser/internal/ezmeral.hpe.com/datafab/fs/proto"
 )
 
-const errInvalidTicket = "invalid mapr ticket"
+// ErrInvalidTicket is the error message returned when a ticket is invalid and cannot be parsed.
+const ErrInvalidTicket = "invalid mapr ticket"
 
 // MaprTicket is a struct representing a MapR ticket.
 type MaprTicket struct {
@@ -26,26 +35,16 @@ type MaprTicket struct {
 	*mapr.TicketAndKey `json:"ticket"`
 }
 
-// NewMaprTicket returns a new empty MaprTicket object.
+// NewMaprTicket returns a new empty MaprTicket object, initializing fields of internal types.
 func NewMaprTicket() *MaprTicket {
 	return &MaprTicket{
-		TicketAndKey: &mapr.TicketAndKey{},
+		TicketAndKey: &mapr.TicketAndKey{
+			UserCreds: &mapr.CredentialsMsg{
+				Capabilities: &mapr.Capabilities{},
+			},
+			UserKey: &mapr.Key{},
+		},
 	}
-}
-
-// unmarshal takes a byte slice containing a decrypted ticket and returns a TicketAndKey object.
-func unmarshal(ticket []byte) (*mapr.TicketAndKey, error) {
-	ticketAndKey := &mapr.TicketAndKey{}
-	if err := proto.Unmarshal(ticket, ticketAndKey); err != nil {
-		return nil, err
-	}
-
-	return ticketAndKey, nil
-}
-
-// marshal takes a Ticket object and returns a byte slice containing a decrypted ticket.
-func marshal(t *mapr.TicketAndKey) ([]byte, error) {
-	return proto.Marshal(t)
 }
 
 // Unmarshal takes a byte slice containing an encoded MapR ticket string representation of a ticket
@@ -54,7 +53,7 @@ func Unmarshal(in []byte) (*MaprTicket, error) {
 	// split the input into the two parts (cluster and ticket blob)
 	parts := strings.Split(string(in), " ")
 	if len(parts) != 2 {
-		return nil, fmt.Errorf("%s: %s", errInvalidTicket, "cannot split ticket into cluster and ticket")
+		return nil, fmt.Errorf("%s: %s", ErrInvalidTicket, "cannot split ticket into cluster and ticket")
 	}
 
 	cluster := parts[0]
@@ -63,7 +62,7 @@ func Unmarshal(in []byte) (*MaprTicket, error) {
 	// base64 decode the ticket
 	ticketEncrypted, err := base64.StdEncoding.DecodeString(blob)
 	if err != nil {
-		return nil, fmt.Errorf("%s: %w", errInvalidTicket, err)
+		return nil, fmt.Errorf("%s: %w", ErrInvalidTicket, err)
 	}
 
 	// decrypt the ticket
@@ -74,13 +73,13 @@ func Unmarshal(in []byte) (*MaprTicket, error) {
 
 	decryptedTicket, err := aes.Decrypt(ticketEncrypted)
 	if err != nil {
-		return nil, fmt.Errorf("%s: %w", errInvalidTicket, err)
+		return nil, fmt.Errorf("%s: %w", ErrInvalidTicket, err)
 	}
 
 	// unmarshal the ticket
 	ticketAndKey, err := unmarshal(decryptedTicket)
 	if err != nil {
-		return nil, fmt.Errorf("%s: %w", errInvalidTicket, err)
+		return nil, fmt.Errorf("%s: %w", ErrInvalidTicket, err)
 	}
 
 	return &MaprTicket{
@@ -119,6 +118,18 @@ func Marshal(in *MaprTicket) ([]byte, error) {
 // String returns a string representation of the ticket.
 func (t *MaprTicket) String() string {
 	// encode to pretty-printed json
+	jsonBytes, err := json.Marshal(t)
+	if err != nil {
+		return ""
+	}
+
+	return string(jsonBytes)
+}
+
+// PrettyString returns a pretty-printed string representation of the ticket, converting timestamps
+// to RFC3339 and durations to human readable format.
+func (t *MaprTicket) PrettyString() string {
+	// encode to pretty-printed json
 	jsonBytes, err := t.prettyJSON()
 	if err != nil {
 		return ""
@@ -137,4 +148,19 @@ func (t *MaprTicket) Mask() *MaprTicket {
 		Cluster:      t.Cluster,
 		TicketAndKey: ticketAndKey,
 	}
+}
+
+// unmarshal takes a byte slice containing a decrypted ticket and returns a TicketAndKey object.
+func unmarshal(ticket []byte) (*mapr.TicketAndKey, error) {
+	ticketAndKey := &mapr.TicketAndKey{}
+	if err := proto.Unmarshal(ticket, ticketAndKey); err != nil {
+		return nil, err
+	}
+
+	return ticketAndKey, nil
+}
+
+// marshal takes a Ticket object and returns a byte slice containing a decrypted ticket.
+func marshal(t *mapr.TicketAndKey) ([]byte, error) {
+	return proto.Marshal(t)
 }
