@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.1.4](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.3...v0.1.4) (2024-03-05)
+
+
+### Miscellaneous Chores
+
+* **deps:** refresh sum-file ([9214f00](https://github.com/nobbs/mapr-ticket-parser/commit/9214f00900119993b6cc9b9d942d597dded30156))
+* **deps:** update codecov/codecov-action action to v4 ([#16](https://github.com/nobbs/mapr-ticket-parser/issues/16)) ([592dd36](https://github.com/nobbs/mapr-ticket-parser/commit/592dd367e6379ea56d3126a39dfd32aa60137193))
+* **deps:** update dependency golang to v1.21.7 ([#17](https://github.com/nobbs/mapr-ticket-parser/issues/17)) ([f1bf4bb](https://github.com/nobbs/mapr-ticket-parser/commit/f1bf4bbf79e8a1b8d9f8d0becdda461a0c4db460))
+* **deps:** update dependency golang to v1.22.0 ([#22](https://github.com/nobbs/mapr-ticket-parser/issues/22)) ([b4de28d](https://github.com/nobbs/mapr-ticket-parser/commit/b4de28db77b6395e5a04d48a75851fed45b86065))
+* **deps:** update dependency golang to v1.22.1 ([#24](https://github.com/nobbs/mapr-ticket-parser/issues/24)) ([c6daca1](https://github.com/nobbs/mapr-ticket-parser/commit/c6daca173fe91667499030cbc50c657cac231e9a))
+* **deps:** update golangci/golangci-lint-action action to v4 ([#19](https://github.com/nobbs/mapr-ticket-parser/issues/19)) ([242d6fb](https://github.com/nobbs/mapr-ticket-parser/commit/242d6fb620b517729d218da520647096020e592b))
+* typo in SPDX license header ([31c5b42](https://github.com/nobbs/mapr-ticket-parser/commit/31c5b4231c11ad9ef541d79172fa84730516b4a8))
+
+
+### Continuous Integration
+
+* update precommit ([65f4066](https://github.com/nobbs/mapr-ticket-parser/commit/65f4066d719bc9abf9efb0734a198a3ca372ff8f))
+
+
+### Bug Fixes
+
+* **deps:** update dependency protobuf to v4.25.3 ([#21](https://github.com/nobbs/mapr-ticket-parser/issues/21)) ([610d925](https://github.com/nobbs/mapr-ticket-parser/commit/610d925b1ca5d65c4212b1858c4a5c2179574828))
+* **deps:** update module github.com/stretchr/testify to v1.9.0 ([#23](https://github.com/nobbs/mapr-ticket-parser/issues/23)) ([01b281b](https://github.com/nobbs/mapr-ticket-parser/commit/01b281b0f3f97199e39ca53483303c531e5254c6))
+* **deps:** update module google.golang.org/protobuf to v1.33.0 ([#25](https://github.com/nobbs/mapr-ticket-parser/issues/25)) ([120836e](https://github.com/nobbs/mapr-ticket-parser/commit/120836e5c14bcf60b70a4adc2dff8de7b4cc2ed7))
+* **deps:** update module k8s.io/apimachinery to v0.29.2 ([#20](https://github.com/nobbs/mapr-ticket-parser/issues/20)) ([fc4a4ee](https://github.com/nobbs/mapr-ticket-parser/commit/fc4a4eec5e937bfc19c11bdadb4d72b40f34271c))
+
 ## [0.1.3](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.2...v0.1.3) (2024-01-27)
 
 

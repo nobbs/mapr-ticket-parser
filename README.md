@@ -15,7 +15,7 @@ To install the module, use the following command:
 <!-- x-release-please-start-version -->
 
 ```bash
-go get github.com/nobbs/mapr-ticket-parser@v0.1.3
+go get github.com/nobbs/mapr-ticket-parser@v0.1.4
 ```
 
 <!-- x-release-please-end -->
