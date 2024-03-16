@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.5](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.4...v0.1.5) (2024-03-16)
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency protobuf to v5 ([#27](https://github.com/nobbs/mapr-ticket-parser/issues/27)) ([8320c8e](https://github.com/nobbs/mapr-ticket-parser/commit/8320c8e02f5a5dfcdb3e11780446327678da1515))
+
+
+### Bug Fixes
+
+* **deps:** update k8s.io/utils digest to 4693a02 ([#26](https://github.com/nobbs/mapr-ticket-parser/issues/26)) ([3bc1dde](https://github.com/nobbs/mapr-ticket-parser/commit/3bc1dde8ad248f458c358429be3ac2c51e5815ba))
+* **deps:** update module k8s.io/apimachinery to v0.29.3 ([#29](https://github.com/nobbs/mapr-ticket-parser/issues/29)) ([b6dfe2c](https://github.com/nobbs/mapr-ticket-parser/commit/b6dfe2c3bedf74ee4160c4bd813200b4c02df385))
+
 ## [0.1.4](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.3...v0.1.4) (2024-03-05)
 
 
