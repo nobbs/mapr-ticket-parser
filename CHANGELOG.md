@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.5](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.4...v0.1.5) (2024-04-17)
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency golang to v1.22.2 ([#31](https://github.com/nobbs/mapr-ticket-parser/issues/31)) ([775bdb4](https://github.com/nobbs/mapr-ticket-parser/commit/775bdb4c433990df96736e4c6d924a507fae0d4c))
+* **deps:** update dependency protobuf to v5 ([#27](https://github.com/nobbs/mapr-ticket-parser/issues/27)) ([8320c8e](https://github.com/nobbs/mapr-ticket-parser/commit/8320c8e02f5a5dfcdb3e11780446327678da1515))
+
+
+### Bug Fixes
+
+* **deps:** update dependency protobuf to v5.26.1 ([#30](https://github.com/nobbs/mapr-ticket-parser/issues/30)) ([bad05e2](https://github.com/nobbs/mapr-ticket-parser/commit/bad05e2a1b04d98a1284ac4272a52fd5d1c77162))
+* **deps:** update k8s.io/utils digest to 4693a02 ([#26](https://github.com/nobbs/mapr-ticket-parser/issues/26)) ([3bc1dde](https://github.com/nobbs/mapr-ticket-parser/commit/3bc1dde8ad248f458c358429be3ac2c51e5815ba))
+* **deps:** update module k8s.io/apimachinery to v0.29.3 ([#29](https://github.com/nobbs/mapr-ticket-parser/issues/29)) ([b6dfe2c](https://github.com/nobbs/mapr-ticket-parser/commit/b6dfe2c3bedf74ee4160c4bd813200b4c02df385))
+* **deps:** update module k8s.io/apimachinery to v0.29.4 ([#32](https://github.com/nobbs/mapr-ticket-parser/issues/32)) ([1502880](https://github.com/nobbs/mapr-ticket-parser/commit/1502880407fcc541ffbdcfd26c1d755bbfcf855c))
+
 ## [0.1.4](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.3...v0.1.4) (2024-03-05)
 
 
