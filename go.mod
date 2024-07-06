@@ -1,10 +1,12 @@
 module github.com/nobbs/mapr-ticket-parser
 
-go 1.22
+go 1.22.0
+
+toolchain go1.22.5
 
 require (
 	github.com/stretchr/testify v1.9.0
-	k8s.io/apimachinery v0.29.4
+	k8s.io/apimachinery v0.30.2
 )
 
 require (
