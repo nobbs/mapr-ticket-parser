@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.1.6](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.5...v0.1.6) (2024-07-06)
+
+
+### Miscellaneous Chores
+
+* **deps:** update golangci/golangci-lint-action action to v6 ([#38](https://github.com/nobbs/mapr-ticket-parser/issues/38)) ([aa8eb5e](https://github.com/nobbs/mapr-ticket-parser/commit/aa8eb5e772739f9bbc473931ccb2e73c7430110f))
+* regenerate from protobuf ([e1d017d](https://github.com/nobbs/mapr-ticket-parser/commit/e1d017d7ba4c72261682855f26843f992c553588))
+* switch from asdf to mise, update go to 1.22.5 ([#42](https://github.com/nobbs/mapr-ticket-parser/issues/42)) ([6a9b66e](https://github.com/nobbs/mapr-ticket-parser/commit/6a9b66ef06476dba546b889c6f43c487d7162d50))
+
+
+### Continuous Integration
+
+* **pre-commit:** update pre-commit hooks and golangci-lint version ([94c9662](https://github.com/nobbs/mapr-ticket-parser/commit/94c96629a596981431b7fccbb585baa3058c965a))
+
+
+### Bug Fixes
+
+* **deps:** update dependency protobuf to v5.27.2 ([#41](https://github.com/nobbs/mapr-ticket-parser/issues/41)) ([de17fb7](https://github.com/nobbs/mapr-ticket-parser/commit/de17fb77e5d698db759d6536d4a9c57d1885de91))
+* **deps:** update k8s.io/utils digest to fe8a2dd ([#40](https://github.com/nobbs/mapr-ticket-parser/issues/40)) ([b83f666](https://github.com/nobbs/mapr-ticket-parser/commit/b83f6666341642fe6945eb6452d759435d40d0e6))
+* **deps:** update module google.golang.org/protobuf to v1.34.2 ([#36](https://github.com/nobbs/mapr-ticket-parser/issues/36)) ([d370f14](https://github.com/nobbs/mapr-ticket-parser/commit/d370f14394a8832f6f0d07bb3d0f3ceb48d0441f))
+* **deps:** update module k8s.io/apimachinery to v0.30.2 ([#33](https://github.com/nobbs/mapr-ticket-parser/issues/33)) ([4bb5a8c](https://github.com/nobbs/mapr-ticket-parser/commit/4bb5a8c6ee90a4a61cff1ce11089b0314778881a))
+
 ## [0.1.5](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.4...v0.1.5) (2024-04-17)
 
 
