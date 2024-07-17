@@ -6,7 +6,7 @@ toolchain go1.22.5
 
 require (
 	github.com/stretchr/testify v1.9.0
-	k8s.io/apimachinery v0.30.2
+	k8s.io/apimachinery v0.30.3
 )
 
 require (
