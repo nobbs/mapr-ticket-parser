@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 protobuf = "^5.0.0"
-cryptography = "^41.0.7"
+cryptography = "*"
 
 [build-system]
 requires = ["poetry-core"]
