@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.7](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.6...v0.1.7) (2024-07-18)
+
+
+### Continuous Integration
+
+* add trivy scan to pr workflow ([#47](https://github.com/nobbs/mapr-ticket-parser/issues/47)) ([c5b7c9b](https://github.com/nobbs/mapr-ticket-parser/commit/c5b7c9b22fd9803517a7e14ce9dc56670437ec6a))
+* **trivy:** fix token permissions ([e7df43e](https://github.com/nobbs/mapr-ticket-parser/commit/e7df43eab74f3db56c8ee5959cbbf9888c5da3f3))
+
+
+### Bug Fixes
+
+* **deps:** update k8s.io/utils digest to 18e509b ([#44](https://github.com/nobbs/mapr-ticket-parser/issues/44)) ([e2ca05a](https://github.com/nobbs/mapr-ticket-parser/commit/e2ca05a54e116822dd30ac81bbe10a73f9d0d455))
+* **deps:** update module k8s.io/apimachinery to v0.30.3 ([#45](https://github.com/nobbs/mapr-ticket-parser/issues/45)) ([a88c272](https://github.com/nobbs/mapr-ticket-parser/commit/a88c27296ab0fbef160ef0fa59232d3dd107f9d2))
+* **python:** update dependencies in `hack/` ([9a880af](https://github.com/nobbs/mapr-ticket-parser/commit/9a880af7b24a5720dedcd2afd61fe4539b347522))
+
 ## [0.1.6](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.5...v0.1.6) (2024-07-06)
 
 
