@@ -12,7 +12,7 @@ import (
 
 const (
 	// the version of the compiled binary
-	version = "0.1.6" // x-release-please-version
+	version = "0.1.7" // x-release-please-version
 )
 
 // Version is a struct to hold the version information
