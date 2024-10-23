@@ -6,7 +6,7 @@ toolchain go1.22.5
 
 require (
 	github.com/stretchr/testify v1.9.0
-	k8s.io/apimachinery v0.30.3
+	k8s.io/apimachinery v0.31.2
 )
 
 require (
@@ -15,8 +15,8 @@ require (
 )
 
 require (
-	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
+	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	google.golang.org/protobuf v1.34.2
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/utils v0.0.0-20240711033017-18e509b52bc8
