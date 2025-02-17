@@ -1,5 +1,36 @@
 # Changelog
 
+## [0.1.8](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.7...v0.1.8) (2025-02-17)
+
+
+### Bug Fixes
+
+* **deps:** update k8s.io/utils digest to 24370be ([#53](https://github.com/nobbs/mapr-ticket-parser/issues/53)) ([0e51bb2](https://github.com/nobbs/mapr-ticket-parser/commit/0e51bb2d934afe536c1fb0334457537c5dad95c5))
+* **deps:** update module github.com/stretchr/testify to v1.10.0 ([#58](https://github.com/nobbs/mapr-ticket-parser/issues/58)) ([8315ebe](https://github.com/nobbs/mapr-ticket-parser/commit/8315ebe6b0416309d338a4b4378f36604e0069f5))
+* **deps:** update module google.golang.org/protobuf to v1.36.5 ([#55](https://github.com/nobbs/mapr-ticket-parser/issues/55)) ([ae69e5a](https://github.com/nobbs/mapr-ticket-parser/commit/ae69e5aa37d71c71b69d4c4d58d887ce1bbdf0bd))
+* **deps:** update module k8s.io/apimachinery to v0.32.2 ([#52](https://github.com/nobbs/mapr-ticket-parser/issues/52)) ([08f0bc8](https://github.com/nobbs/mapr-ticket-parser/commit/08f0bc874702e796be0656f9cc41bf7b0e8f93e9))
+
+
+### Build System
+
+* **deps:** update dependency go to v1.24.0 ([#51](https://github.com/nobbs/mapr-ticket-parser/issues/51)) ([aa1b633](https://github.com/nobbs/mapr-ticket-parser/commit/aa1b633fe1431f2630db4af85f01451e645a410b))
+
+
+### Continuous Integration
+
+* add codeql workflow ([#48](https://github.com/nobbs/mapr-ticket-parser/issues/48)) ([5de378f](https://github.com/nobbs/mapr-ticket-parser/commit/5de378f7abff9effe2a1bd897659cea98e3bf041))
+* **deps:** update aquasecurity/trivy-action action to v0.29.0 ([#56](https://github.com/nobbs/mapr-ticket-parser/issues/56)) ([f92e5f0](https://github.com/nobbs/mapr-ticket-parser/commit/f92e5f0359cdcffb381d2a56f19fe81d0fa4eb8e))
+* **deps:** update codecov/codecov-action action to v5 ([#57](https://github.com/nobbs/mapr-ticket-parser/issues/57)) ([aa22dc0](https://github.com/nobbs/mapr-ticket-parser/commit/aa22dc0c26a20c6ddbb31383faf4d3917124a41d))
+* remove unused languages from codeql workflow ([a763aa4](https://github.com/nobbs/mapr-ticket-parser/commit/a763aa42ec4e7afdf0e6e7b787f213da921c917a))
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency cryptography to v44 ([#59](https://github.com/nobbs/mapr-ticket-parser/issues/59)) ([9a689e1](https://github.com/nobbs/mapr-ticket-parser/commit/9a689e12e7d8bc5f1fe20e3af6261cf07bf165b7))
+* **deps:** update dependency protobuf to v5.29.3 ([#54](https://github.com/nobbs/mapr-ticket-parser/issues/54)) ([f1586be](https://github.com/nobbs/mapr-ticket-parser/commit/f1586be052ccf625ed61664c1c041a3e172aa347))
+* regenerate files ([#61](https://github.com/nobbs/mapr-ticket-parser/issues/61)) ([a903353](https://github.com/nobbs/mapr-ticket-parser/commit/a903353e7dcc9d377cb65ca13c9d021bb0a97698))
+* update release-please configuration for changelog sections ([c8e42e3](https://github.com/nobbs/mapr-ticket-parser/commit/c8e42e3e482d9d31dcff660921471877d73b3c41))
+
 ## [0.1.7](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.6...v0.1.7) (2024-07-18)
 
 
