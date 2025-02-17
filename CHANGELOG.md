@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.9](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.8...v0.1.9) (2025-02-17)
+
+
+### Continuous Integration
+
+* **renovate:** add replacement rule for release please action ([5fc209e](https://github.com/nobbs/mapr-ticket-parser/commit/5fc209e28cac77126ecb3e755248d75dee9a30e5))
+
+
+### Miscellaneous Chores
+
+* **deps:** replace google-github-actions/release-please-action action with googleapis/release-please-action v4 ([#62](https://github.com/nobbs/mapr-ticket-parser/issues/62)) ([f62d1fc](https://github.com/nobbs/mapr-ticket-parser/commit/f62d1fcf2e947ebd4675d9b09af4d44ccb75e977))
+
 ## [0.1.8](https://github.com/nobbs/mapr-ticket-parser/compare/v0.1.7...v0.1.8) (2025-02-17)
 
 
